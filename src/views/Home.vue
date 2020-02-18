@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="one" v-for="(item, index) in DXYAreaList" :key="index">
+      klalallalalalla
+      <div>{{ item.continentName }}</div>
+      {{ item.updateTime }}
+      <p>{{ item.curedCount }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
+  name: 'DXYArea',
+  data() {
+    return {
+      DXYAreaList: [],
+    }
+  },
+  created() {
+    this.axios.get('/api/DXYArea').then(res => {
+      this.DXYAreaList = res.data.data.results
+    })
+  },
+}
 </script>
